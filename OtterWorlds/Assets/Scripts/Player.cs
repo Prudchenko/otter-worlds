@@ -7,10 +7,12 @@ public class Player : MonoBehaviour
     private Rigidbody2D myRigidbody;
     [SerializeField]
     private float movementSpeed;
+    private bool facingRight;
 
     // Start is called before the first frame update
     void Start()
     {
+        facingRight = true;
         myRigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -24,6 +26,10 @@ public class Player : MonoBehaviour
     {
 
         myRigidbody.velocity =  new Vector2(horizontal*movementSpeed,myRigidbody.velocity.y);
+
+    }
+    private void Flip (float horizontal)
+    {
 
     }
 }
