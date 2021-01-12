@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimatorController : MonoBehaviour
-{
-    private Animator anim;
+    {
+        private Animator anim;
     public SpriteRenderer sprt;
     PlayerController PlayerC;
     // Start is called before the first frame update

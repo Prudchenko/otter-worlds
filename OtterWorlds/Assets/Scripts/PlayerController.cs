@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Animator anim;
+
     public float speed ;
     public float jumpForce;
     private float inputHorizontal;
@@ -32,12 +34,14 @@ public class PlayerController : MonoBehaviour
     {
         onLadder = false;
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
     void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         inputHorizontal = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(inputHorizontal * speed, rb.velocity.y);
+        HandleLayers();
     }
     private void Update()
     {
@@ -110,6 +114,21 @@ public class PlayerController : MonoBehaviour
         if (usable != null)
         {
             usable.Use();
+        }
+    }
+
+    private void HandleLayers()
+    {
+        if (!isGrounded)
+        {
+            Debug.Log("sas");
+            anim.SetLayerWeight(1, 1);
+        }
+        else
+        {
+            anim.SetLayerWeight(1, 0);
+            anim.ResetTrigger("Jump");
+            anim.SetBool("Land", false);
         }
     }
 }
