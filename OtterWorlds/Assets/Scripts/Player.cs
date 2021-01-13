@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         HandleMovement(horizontal);
+        Flip(horizontal);
     }
     private void HandleMovement(float horizontal)
     {
@@ -28,8 +29,16 @@ public class Player : MonoBehaviour
         myRigidbody.velocity =  new Vector2(horizontal*movementSpeed,myRigidbody.velocity.y);
 
     }
+    
+    //Flipping player when moving left-right
     private void Flip (float horizontal)
     {
-
+        if(horizontal>0&& !facingRight||horizontal < 0 && facingRight)
+        {
+            facingRight = !facingRight;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
     }
 }

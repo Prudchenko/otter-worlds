@@ -202,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315977129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 294.273, y: 127.249, z: 0}
+  m_LocalPosition: {x: 294.273, y: 127.2, z: 0}
   m_LocalScale: {x: 10.347837, y: 13.360636, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -399,7 +399,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -423,7 +423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 282.54, y: 118.65, z: -10}
+  m_LocalPosition: {x: 282.22, y: 117.46, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -514,6 +514,7 @@ GameObject:
   - component: {fileID: 840213191}
   - component: {fileID: 840213196}
   - component: {fileID: 840213197}
+  - component: {fileID: 840213198}
   m_Layer: 8
   m_Name: Hero
   m_TagString: Otter
@@ -624,8 +625,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840213189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 283.62, y: 114.87, z: -0.66895}
-  m_LocalScale: {x: 1.2006193, y: 1.0709871, z: 0.47668216}
+  m_LocalPosition: {x: 280.55, y: 114.96, z: -0.66895}
+  m_LocalScale: {x: 0.87370557, y: 0.77937067, z: 0.34688753}
   m_Children:
   - {fileID: 1373393695}
   m_Father: {fileID: 0}
@@ -638,7 +639,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840213189}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16900377c1adf174b8aababdb49226b8, type: 3}
   m_Name: 
@@ -672,7 +673,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840213189}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ca198965e691c24bace3696ee50d115, type: 3}
   m_Name: 
@@ -682,7 +683,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   isGrounded: 0
   groundCheck: {fileID: 1373393695}
-  checkRadius: 2
+  checkRadius: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1536
@@ -705,6 +706,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0000060582006, y: 0.7001256}
   m_Size: {x: 0.71434665, y: 1.2561426}
   m_Direction: 0
+--- !u!114 &840213198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840213189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2589b565c72b34249b9eadb736156260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 7
 --- !u!1 &1120108725
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +880,7 @@ PrefabInstance:
     - target: {fileID: 1829479937332367184, guid: f9b5a846847706e4a9a19fc4dbf31f02,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.2416077
+      value: -0.91
       objectReference: {fileID: 0}
     - target: {fileID: 1829479937332367184, guid: f9b5a846847706e4a9a19fc4dbf31f02,
         type: 3}
