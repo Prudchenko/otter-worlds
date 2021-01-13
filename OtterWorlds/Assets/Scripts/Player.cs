@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private Animator myAnimator;
     [SerializeField]
     private float movementSpeed;
+    private bool attack;
     private bool facingRight;
 
     // Start is called before the first frame update
@@ -19,19 +20,45 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
+    private void Update()
+    {
+        HandleInput();
+    }
+
     void FixedUpdate()
     {
         float horizontal = Input.GetAxis("Horizontal");
         HandleMovement(horizontal);
         Flip(horizontal);
+        HandleAttack();
+        ResetValues();
     }
     private void HandleMovement(float horizontal)
     {
-
-        myRigidbody.velocity =  new Vector2(horizontal*movementSpeed,myRigidbody.velocity.y);
+        if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
+        }
+        //Moving mechanic and animation
         myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
+    private void HandleAttack()
+    {
+        if (attack&& !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            myAnimator.SetTrigger("attack");
+            myRigidbody.velocity = Vector2.zero;
+        }
+    }
     
+    private void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            attack = true;
+        }
+    }
+
     //Flipping player when moving left-right
     private void Flip (float horizontal)
     {
@@ -42,5 +69,9 @@ public class Player : MonoBehaviour
             theScale.x *= -1;
             transform.localScale = theScale;
         }
+    }
+    private void ResetValues()
+    {
+        attack = false;
     }
 }
