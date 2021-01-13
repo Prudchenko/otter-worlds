@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D myRigidbody;
+    private Animator myAnimator;
     [SerializeField]
     private float movementSpeed;
     private bool facingRight;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     {
         facingRight = true;
         myRigidbody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -27,7 +29,7 @@ public class Player : MonoBehaviour
     {
 
         myRigidbody.velocity =  new Vector2(horizontal*movementSpeed,myRigidbody.velocity.y);
-
+        myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
     
     //Flipping player when moving left-right
