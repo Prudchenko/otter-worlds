@@ -41,13 +41,14 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         //Checks if player is grounded
         isGrounded = IsGrounded();
-        Debug.Log(isGrounded);
         //Moves player if possible
         HandleMovement(horizontal);
         //Flips Player if possible
         Flip(horizontal);
         //Attack is possible
         HandleAttack();
+        //Checks which animation layer to play
+        HandleLayers();
         ResetValues();
     }
     private void HandleMovement(float horizontal)
@@ -57,11 +58,12 @@ public class Player : MonoBehaviour
         {
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
         }
+        //Jumping mechanic and animation
         if (isGrounded && jump)
         {
-            Debug.Log("Jump");
             isGrounded = false;
             myRigidbody.AddForce(new Vector2(0, jumpForce));
+            myAnimator.SetTrigger("jump");
         }
         myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
@@ -78,6 +80,11 @@ public class Player : MonoBehaviour
     //Checks for input for special actions
     private void HandleInput()
     {
+        //Upon falling, landing animation is played
+        if (myRigidbody.velocity.y < 0)
+        {
+            myAnimator.SetBool("land", true);
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             attack = true;
@@ -118,11 +125,27 @@ public class Player : MonoBehaviour
                 {
                     if (colliders[i].gameObject != gameObject)
                     {
+                        //Reseting jumping animation triggers
+                        myAnimator.ResetTrigger("jump");
+                        myAnimator.SetBool("land", false);
+
                         return true;
                     }
                 }
             }
         }
         return false;
+    }
+    private void HandleLayers()
+    {
+        //When Otter is not on ground, Air Layer is played
+        if (!isGrounded)
+        {
+            myAnimator.SetLayerWeight(1, 1);
+        }
+        else
+        {
+            myAnimator.SetLayerWeight(1, 0);
+        }
     }
 }
