@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     private bool airControl;
     [SerializeField]
     private float jumpForce;
+    private bool jumpAttack;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,10 +71,17 @@ public class Player : MonoBehaviour
     private void HandleAttack()
     {
         //Attack animation
-        if (attack&& !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        if (attack&& isGrounded && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             myAnimator.SetTrigger("attack");
             myRigidbody.velocity = Vector2.zero;
+        }
+        if (jumpAttack && !isGrounded && !this.myAnimator.GetCurrentAnimatorStateInfo(1).IsName("jumpAttack")){
+            myAnimator.SetBool("jumpAttack", true);
+        }
+        if (!jumpAttack && !this.myAnimator.GetCurrentAnimatorStateInfo(1).IsName("jumpAttack"))
+        {
+            myAnimator.SetBool("jumpAttack", false);
         }
     }
     
@@ -88,6 +96,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             attack = true;
+            jumpAttack = true;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -110,6 +119,7 @@ public class Player : MonoBehaviour
     {
         attack = false;
         jump = false;
+        jumpAttack = false;
     }
 
     //Checks if otter's paws touch something
