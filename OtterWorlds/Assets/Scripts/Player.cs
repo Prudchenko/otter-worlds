@@ -98,9 +98,13 @@ public class Player : MonoBehaviour
             attack = true;
             jumpAttack = true;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.S))
         {
             jump = true;
+        }
+        if (isGrounded == true && Input.GetKey(KeyCode.S) && Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(FallTimer());
         }
     }
 
@@ -157,5 +161,13 @@ public class Player : MonoBehaviour
         {
             myAnimator.SetLayerWeight(1, 0);
         }
+    }
+    IEnumerator FallTimer()
+    {
+        gameObject.layer = 10;
+        myRigidbody.gravityScale += 4;
+        yield return new WaitForSeconds(0.15f);
+        gameObject.layer = 8;
+        myRigidbody.gravityScale -= 4;
     }
 }
