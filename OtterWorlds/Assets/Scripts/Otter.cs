@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Otter : MonoBehaviour
 {
     private Rigidbody2D myRigidbody;
     private Animator myAnimator;
