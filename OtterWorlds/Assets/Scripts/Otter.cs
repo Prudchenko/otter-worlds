@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class Otter : MonoBehaviour
 {
+    //Singleton pattern to access from other scripts
+    private static Otter instance;
+    public static Otter Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = GameObject.FindObjectOfType<Otter>();
+            }
+            return instance;
+        }
+    }
+
     private Animator myAnimator;
     [SerializeField]
     private float movementSpeed;
@@ -75,9 +89,11 @@ public class Otter : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            myAnimator.SetTrigger("attack");
         }
         if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.S))
         {
+            myAnimator.SetTrigger("jump");
         }
         if (OnGround == true && Input.GetKey(KeyCode.S) && Input.GetKeyDown(KeyCode.Space))
         {
