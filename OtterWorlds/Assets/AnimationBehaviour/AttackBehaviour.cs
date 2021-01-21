@@ -25,6 +25,8 @@ public class AttackBehaviour : StateMachineBehaviour
     {
         Otter.Instance.Attack = false;
         animator.ResetTrigger("attack");
+        animator.ResetTrigger("fire");
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

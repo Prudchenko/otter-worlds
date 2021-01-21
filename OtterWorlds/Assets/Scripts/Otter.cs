@@ -99,6 +99,10 @@ public class Otter : MonoBehaviour
         {
             StartCoroutine(FallTimer());
         }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            myAnimator.SetTrigger("fire");
+        }
     }
 
     //Flipping player when moving left-right
