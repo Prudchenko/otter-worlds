@@ -32,12 +32,13 @@ public class Otter : MonoBehaviour
     private bool airControl;
     [SerializeField]
     private float jumpForce;
+    [SerializeField]
+    private GameObject bulletPrefab;
     public Rigidbody2D MyRigidbody { get; set; }
     public bool Attack { get; set; }
     public bool Jump { get; set; }
     public bool OnGround { get; set; }
 
-    // Start is called before the first frame update
     void Start()
     {
         facingRight = true;
@@ -65,14 +66,17 @@ public class Otter : MonoBehaviour
     }
     private void HandleMovement(float horizontal)
     {
+        //Otter falls
         if (MyRigidbody.velocity.y < 0)
         {
             myAnimator.SetBool("land", true);
         }
+        //Idling/running
         if (!Attack && (OnGround || airControl))
         {
             MyRigidbody.velocity = new Vector2(horizontal * movementSpeed, MyRigidbody.velocity.y);
         }
+        //Jumping
         if (Jump && MyRigidbody.velocity.y == 0)
         {
             MyRigidbody.AddForce(new Vector2(0, jumpForce));
@@ -82,26 +86,26 @@ public class Otter : MonoBehaviour
     //Checks for input for special actions
     private void HandleInput()
     {
-        //Upon falling, landing animation is played
-        if (MyRigidbody.velocity.y < 0)
-        {
-            myAnimator.SetBool("land", true);
-        }
+               //Attack
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             myAnimator.SetTrigger("attack");
         }
+        //Jump
         if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.S))
         {
             myAnimator.SetTrigger("jump");
         }
+        //Jump from oneway platform
         if (OnGround == true && Input.GetKey(KeyCode.S) && Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(FallTimer());
         }
+        //Fire
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             myAnimator.SetTrigger("fire");
+            Fire(0);
         }
     }
 
@@ -156,5 +160,18 @@ public class Otter : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         gameObject.layer = 8;
         MyRigidbody.gravityScale -= 4;
+    }
+    public void Fire(int value)
+    {
+        if (facingRight){
+            GameObject tmp = (GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.Euler(new Vector3(0,0,-90)));
+            tmp.GetComponent<Bullet>().Initialize(Vector2.right);
+        }
+        else
+        {
+
+            GameObject tmp = (GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, 90)));
+            tmp.GetComponent<Bullet>().Initialize(Vector2.left);
+        }
     }
 }

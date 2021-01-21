@@ -11,7 +11,7 @@ public class Ladder : MonoBehaviour,IUsable
     // Start is called before the first frame update
     void Start()
     {
-        gameObj = GameObject.Find("Hero");
+        gameObj = GameObject.Find("Otter");
         plCo = gameObj.GetComponent<PlayerController>();
     }
 
