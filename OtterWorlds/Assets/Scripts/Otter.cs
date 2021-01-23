@@ -20,6 +20,8 @@ public class Otter : MonoBehaviour
 
     private Animator myAnimator;
     [SerializeField]
+    private Transform bulletPos;
+    [SerializeField]
     private float movementSpeed;
     private bool facingRight;
     [SerializeField]
@@ -105,7 +107,6 @@ public class Otter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             myAnimator.SetTrigger("fire");
-            Fire(0);
         }
     }
 
@@ -163,15 +164,20 @@ public class Otter : MonoBehaviour
     }
     public void Fire(int value)
     {
-        if (facingRight){
-            GameObject tmp = (GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.Euler(new Vector3(0,0,-90)));
-            tmp.GetComponent<Bullet>().Initialize(Vector2.right);
-        }
-        else
+        if (!OnGround && value == 1 || OnGround && value == 0)
         {
 
-            GameObject tmp = (GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, 90)));
-            tmp.GetComponent<Bullet>().Initialize(Vector2.left);
+            if (facingRight)
+            {
+                GameObject tmp = (GameObject)Instantiate(bulletPrefab, bulletPos.position, Quaternion.Euler(new Vector3(0, 0, -90)));
+                tmp.GetComponent<Bullet>().Initialize(Vector2.right);
+            }
+            else
+            {
+
+                GameObject tmp = (GameObject)Instantiate(bulletPrefab, bulletPos.position, Quaternion.Euler(new Vector3(0, 0, 90)));
+                tmp.GetComponent<Bullet>().Initialize(Vector2.left);
+            }
         }
     }
 }

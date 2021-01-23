@@ -259,6 +259,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e650065b8a6475f459f7db195837f9a4, type: 3}
+--- !u!1 &98838566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 98838567}
+  m_Layer: 0
+  m_Name: BulletPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &98838567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98838566}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.37, y: 0.71, z: -897.88086}
+  m_LocalScale: {x: 1.1445503, y: 1.2830865, z: 2.8827786}
+  m_Children: []
+  m_Father: {fileID: 840213193}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &142105597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1028,6 +1058,7 @@ Transform:
   - {fileID: 1373393695}
   - {fileID: 1404451882}
   - {fileID: 692168524}
+  - {fileID: 98838567}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1104,6 +1135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2589b565c72b34249b9eadb736156260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPos: {fileID: 98838567}
   movementSpeed: 7
   groundPoints:
   - {fileID: 1373393695}
