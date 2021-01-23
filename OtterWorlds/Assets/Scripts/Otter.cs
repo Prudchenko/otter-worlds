@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Otter : MonoBehaviour
+public class Otter : Character
 {
     //Singleton pattern to access from other scripts
     private static Otter instance;
@@ -18,12 +18,6 @@ public class Otter : MonoBehaviour
         }
     }
 
-    private Animator myAnimator;
-    [SerializeField]
-    private Transform bulletPos;
-    [SerializeField]
-    private float movementSpeed;
-    private bool facingRight;
     [SerializeField]
     private Transform[] groundPoints;
     [SerializeField]
@@ -34,18 +28,14 @@ public class Otter : MonoBehaviour
     private bool airControl;
     [SerializeField]
     private float jumpForce;
-    [SerializeField]
-    private GameObject bulletPrefab;
     public Rigidbody2D MyRigidbody { get; set; }
-    public bool Attack { get; set; }
     public bool Jump { get; set; }
     public bool OnGround { get; set; }
 
-    void Start()
+    public override void Start()
     {
-        facingRight = true;
+        base.Start();
         MyRigidbody = GetComponent<Rigidbody2D>();
-        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -115,10 +105,7 @@ public class Otter : MonoBehaviour
     {
         if((horizontal>0&& !facingRight||horizontal < 0 && facingRight)&& !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
-            facingRight = !facingRight;
-            Vector3 theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
+            ChangeDirection(); 
         }
     }
 
@@ -162,22 +149,11 @@ public class Otter : MonoBehaviour
         gameObject.layer = 8;
         MyRigidbody.gravityScale -= 4;
     }
-    public void Fire(int value)
+    public override void Fire(int value)
     {
         if (!OnGround && value == 1 || OnGround && value == 0)
         {
-
-            if (facingRight)
-            {
-                GameObject tmp = (GameObject)Instantiate(bulletPrefab, bulletPos.position, Quaternion.Euler(new Vector3(0, 0, -90)));
-                tmp.GetComponent<Bullet>().Initialize(Vector2.right);
-            }
-            else
-            {
-
-                GameObject tmp = (GameObject)Instantiate(bulletPrefab, bulletPos.position, Quaternion.Euler(new Vector3(0, 0, 90)));
-                tmp.GetComponent<Bullet>().Initialize(Vector2.left);
-            }
+            base.Fire(value);
         }
     }
 }
