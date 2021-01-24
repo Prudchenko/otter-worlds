@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IEnemyState : MonoBehaviour
+public interface IEnemyState
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    void Execute();
+    void Enter();
+    void Exit();
+    void OnTriggerEnter(Collider2D other);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
