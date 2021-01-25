@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    protected Animator myAnimator;
     [SerializeField]
     private Transform bulletPos;
     [SerializeField]
@@ -13,11 +12,12 @@ public abstract class Character : MonoBehaviour
     [SerializeField]
     protected GameObject bulletPrefab;
     public bool Attack { get; set; }
+    public Animator MyAnimator { get;private set; }
     // Start is called before the first frame update
     public virtual void Start()
     {
         facingRight = true;
-        myAnimator = GetComponent<Animator>();
+        MyAnimator = GetComponent<Animator>();
 
     }
 

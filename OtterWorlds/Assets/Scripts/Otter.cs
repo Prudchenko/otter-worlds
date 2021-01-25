@@ -61,7 +61,7 @@ public class Otter : Character
         //Otter falls
         if (MyRigidbody.velocity.y < 0)
         {
-            myAnimator.SetBool("land", true);
+            MyAnimator.SetBool("land", true);
         }
         //Idling/running
         if (!Attack && (OnGround || airControl))
@@ -73,7 +73,7 @@ public class Otter : Character
         {
             MyRigidbody.AddForce(new Vector2(0, jumpForce));
         }
-        myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
+        MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
     //Checks for input for special actions
     private void HandleInput()
@@ -81,12 +81,12 @@ public class Otter : Character
                //Attack
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            myAnimator.SetTrigger("attack");
+            MyAnimator.SetTrigger("attack");
         }
         //Jump
         if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.S))
         {
-            myAnimator.SetTrigger("jump");
+            MyAnimator.SetTrigger("jump");
         }
         //Jump from oneway platform
         if (OnGround == true && Input.GetKey(KeyCode.S) && Input.GetKeyDown(KeyCode.Space))
@@ -96,14 +96,14 @@ public class Otter : Character
         //Fire
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            myAnimator.SetTrigger("fire");
+            MyAnimator.SetTrigger("fire");
         }
     }
 
     //Flipping player when moving left-right
     private void Flip (float horizontal)
     {
-        if((horizontal>0&& !facingRight||horizontal < 0 && facingRight)&& !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        if((horizontal>0&& !facingRight||horizontal < 0 && facingRight)&& !this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             ChangeDirection(); 
         }
@@ -134,11 +134,11 @@ public class Otter : Character
         //When Otter is not on ground, Air Layer is played
         if (!OnGround)
         {
-            myAnimator.SetLayerWeight(1, 1);
+            MyAnimator.SetLayerWeight(1, 1);
         }
         else
         {
-            myAnimator.SetLayerWeight(1, 0);
+            MyAnimator.SetLayerWeight(1, 0);
         }
     }
     IEnumerator FallTimer()

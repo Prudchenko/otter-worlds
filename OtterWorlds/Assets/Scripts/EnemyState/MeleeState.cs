@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MeleeState : IEnemyState
 {
-    public void Enter()
+    private Enemy enemy;
+    public void Enter(Enemy enemy)
     {
+        this.enemy = enemy;
     }
 
     public void Execute()
