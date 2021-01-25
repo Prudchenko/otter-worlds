@@ -12,6 +12,14 @@ public class RangedState : IEnemyState
 
     public void Execute()
     {
+        if (enemy.Target != null)
+        {
+            enemy.Move();
+        }
+        else
+        {
+            enemy.ChangeState(new IdleState());
+        }
     }
 
     public void Exit()

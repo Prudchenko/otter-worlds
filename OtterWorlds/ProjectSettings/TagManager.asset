@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Usable
   - Otter
+  - Edge
   layers:
   - Default
   - TransparentFX
