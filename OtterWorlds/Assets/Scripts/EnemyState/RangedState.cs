@@ -5,6 +5,9 @@ using UnityEngine;
 public class RangedState : IEnemyState
 {
     private Enemy enemy;
+    private float fireTimer;
+    private float fireCooldown=3;
+    private bool canFire=true;
     public void Enter(Enemy enemy)
     {
         this.enemy = enemy;
@@ -12,7 +15,13 @@ public class RangedState : IEnemyState
 
     public void Execute()
     {
-        if (enemy.Target != null)
+        Fire();
+
+        if (enemy.InMeleeRange)
+        {
+            enemy.ChangeState(new MeleeState());
+        }
+        else if (enemy.Target != null)
         {
             enemy.Move();
         }
@@ -28,5 +37,19 @@ public class RangedState : IEnemyState
 
     public void OnTriggerEnter(Collider2D other)
     {
+    }
+    private void Fire()
+    {
+        fireTimer += Time.deltaTime;
+        if (fireTimer >= fireCooldown)
+        {
+            canFire = true;
+            fireTimer = 0;
+        }
+        if (canFire)
+        {
+            canFire = false;
+            enemy.MyAnimator.SetTrigger("fire");
+        }
     }
 }

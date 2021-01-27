@@ -670,10 +670,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303739511}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.39, y: -2.92, z: 0}
-  m_LocalScale: {x: 0.8990017, y: 0.8990017, z: 0.8990017}
+  m_LocalPosition: {x: -6.9824, y: -3.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1953861632}
+  - {fileID: 731313666}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -710,9 +711,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15747101f1cf44b48a26692de3f2a50c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPos: {fileID: 0}
+  bulletPos: {fileID: 731313666}
   movementSpeed: 6
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 2141520682566514349, guid: a31baed7cdc679e4795dedff3114f104,
+    type: 3}
+  meleeRange: 1
+  fireRange: 12
 --- !u!114 &303739519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1133,6 +1137,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 142105597}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &731313665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 731313666}
+  m_Layer: 12
+  m_Name: BulletPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &731313666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731313665}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3, y: 0.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 303739514}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &840213189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,8 +1265,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840213189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.83, y: -3.6, z: 0}
-  m_LocalScale: {x: 0.87370557, y: 0.77937067, z: 0.34688753}
+  m_LocalPosition: {x: -5.83, y: -3.757, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1373393695}
   - {fileID: 1404451882}
@@ -1323,7 +1357,7 @@ MonoBehaviour:
   groundRadius: 0.01
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3895
   airControl: 1
   jumpForce: 700
 --- !u!1 &854891862
@@ -2924,7 +2958,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3, y: 0}
+  m_Offset: {x: 6.9912267, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2935,7 +2969,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.043615, y: 0.26638204}
+  m_Size: {x: 15.026069, y: 0.26638204}
   m_EdgeRadius: 0
 --- !u!114 &1953861634
 MonoBehaviour:

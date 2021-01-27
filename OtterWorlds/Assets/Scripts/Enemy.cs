@@ -6,6 +6,32 @@ public class Enemy : Character
 {
     private IEnemyState currentState;
     public GameObject Target { get; set; }
+    [SerializeField]
+    private float meleeRange;
+    [SerializeField]
+    private float fireRange;
+    public bool InMeleeRange
+    {
+        get
+        {
+            if (Target != null)
+            {
+                return Vector2.Distance(transform.position, Target.transform.position) <= meleeRange;
+            }
+            return false;
+        }
+    }
+    public bool InFireRange
+    {
+        get
+        {
+            if (Target != null)
+            {
+                return Vector2.Distance(transform.position, Target.transform.position) <= fireRange;
+            }
+            return false;
+        }
+    }
     // Start is called before the first frame update
     public override void Start()
     {
@@ -43,8 +69,13 @@ public class Enemy : Character
     }
     public void Move()
     {
-        MyAnimator.SetFloat("speed", 1);
-        transform.Translate(GetDirection()*movementSpeed*Time.deltaTime);
+        if (!Attack)
+        {
+
+            MyAnimator.SetFloat("speed", 1);
+            transform.Translate(GetDirection() * movementSpeed * Time.deltaTime);
+
+        }
     }
     public Vector2 GetDirection()
     {

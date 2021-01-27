@@ -29,7 +29,7 @@ public abstract class Character : MonoBehaviour
     public void ChangeDirection()
     {
         facingRight = !facingRight;
-        transform.localScale = new Vector3(transform.localScale.x * -1, (float)0.7793707, (float)0.3468875);
+        transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
     }
     public virtual void Fire(int value)
     {
