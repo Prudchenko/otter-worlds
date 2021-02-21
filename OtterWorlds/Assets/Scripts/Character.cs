@@ -14,7 +14,10 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField]
     protected int health;
-
+    [SerializeField]
+    private EdgeCollider2D MeleeCollider;
+    [SerializeField]
+    private List<string> damageSources;
     public abstract bool IsDead { get; }
 
     public bool Attack { get; set; }
@@ -34,6 +37,7 @@ public abstract class Character : MonoBehaviour
     {
         
     }
+    public abstract IEnumerator TakeDamage();
     public void ChangeDirection()
     {
         facingRight = !facingRight;
@@ -54,11 +58,13 @@ public abstract class Character : MonoBehaviour
             tmp.GetComponent<Bullet>().Initialize(Vector2.left);
         }
     }
-    public abstract IEnumerator TakeDamage();
-
+    public void MeleeAttack()
+    {
+        MeleeCollider.enabled = !MeleeCollider.enabled;
+    }
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Bullet")
+        if (damageSources.Contains(other.tag))
         {
             StartCoroutine(TakeDamage());
         }

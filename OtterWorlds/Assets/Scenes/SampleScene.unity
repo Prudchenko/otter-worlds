@@ -716,6 +716,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2141520682566514349, guid: a31baed7cdc679e4795dedff3114f104,
     type: 3}
   health: 60
+  MeleeCollider: {fileID: 0}
+  damageSources:
+  - Bullet
+  - Melee
   meleeRange: 1
   fireRange: 12
 --- !u!114 &303739519
@@ -964,6 +968,67 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7047010421505795486}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &610584164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 610584166}
+  - component: {fileID: 610584165}
+  m_Layer: 0
+  m_Name: SwordCollider
+  m_TagString: Melee
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!68 &610584165
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610584164}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -1.5341702, y: 0.816797}
+  - {x: -1.0367122, y: 0.86887884}
+  - {x: -0.6431136, y: 0.83204126}
+  - {x: -0.30710697, y: 0.7465968}
+  - {x: -0.012705326, y: 0.57461333}
+  - {x: 0.13879156, y: 0.48748708}
+  - {x: 0.25967073, y: 0.35875487}
+  - {x: 0.3198943, y: 0.19339728}
+  - {x: 0.3175068, y: 0.07644272}
+  - {x: 0.2769251, y: -0.10277152}
+  - {x: 0.080370426, y: -0.27187872}
+  - {x: -0.15420532, y: -0.38288617}
+  - {x: -0.44944096, y: -0.42595983}
+  - {x: -1.5288177, y: 0.82338405}
+--- !u!4 &610584166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610584164}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.1353097, y: 0.75328493, z: -4.711379}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 840213193}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &678294739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1147,6 +1212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 731313666}
+  - component: {fileID: 731313667}
   m_Layer: 12
   m_Name: BulletPos
   m_TagString: Untagged
@@ -1168,6 +1234,19 @@ Transform:
   m_Father: {fileID: 303739514}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &731313667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731313665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21c359306ad3cf4d89c19068c3d2586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  other: {fileID: 610584165}
 --- !u!1 &840213189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,6 +1352,7 @@ Transform:
   - {fileID: 1404451882}
   - {fileID: 692168524}
   - {fileID: 98838567}
+  - {fileID: 610584166}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1351,7 +1431,11 @@ MonoBehaviour:
   movementSpeed: 7
   bulletPrefab: {fileID: 2141520682566514349, guid: a31baed7cdc679e4795dedff3114f104,
     type: 3}
-  health: 0
+  health: 10
+  MeleeCollider: {fileID: 610584165}
+  damageSources:
+  - 
+  - 
   groundPoints:
   - {fileID: 1373393695}
   - {fileID: 692168524}
@@ -2926,6 +3010,7 @@ GameObject:
   - component: {fileID: 1953861632}
   - component: {fileID: 1953861634}
   - component: {fileID: 1953861633}
+  - component: {fileID: 1953861635}
   m_Layer: 12
   m_Name: Sight
   m_TagString: Untagged
@@ -2986,6 +3071,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 303739518}
+--- !u!114 &1953861635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953861631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21c359306ad3cf4d89c19068c3d2586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  other: {fileID: 0}
 --- !u!1001 &1977020025
 PrefabInstance:
   m_ObjectHideFlags: 0
