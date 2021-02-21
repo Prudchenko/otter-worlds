@@ -11,7 +11,15 @@ public abstract class Character : MonoBehaviour
     protected bool facingRight;
     [SerializeField]
     protected GameObject bulletPrefab;
+
+    [SerializeField]
+    protected int health;
+
+    public abstract bool IsDead { get; }
+
     public bool Attack { get; set; }
+
+    public bool TakingDamage { get; set; }
     public Animator MyAnimator { get;private set; }
     // Start is called before the first frame update
     public virtual void Start()
@@ -44,6 +52,15 @@ public abstract class Character : MonoBehaviour
 
             GameObject tmp = (GameObject)Instantiate(bulletPrefab, bulletPos.position, Quaternion.Euler(new Vector3(0, 0, 90)));
             tmp.GetComponent<Bullet>().Initialize(Vector2.left);
+        }
+    }
+    public abstract IEnumerator TakeDamage();
+
+    public virtual void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Bullet")
+        {
+            StartCoroutine(TakeDamage());
         }
     }
 }

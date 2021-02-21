@@ -10,6 +10,8 @@ public class Enemy : Character
     private float meleeRange;
     [SerializeField]
     private float fireRange;
+
+    //Checks if target is close enough to hit in melee
     public bool InMeleeRange
     {
         get
@@ -21,6 +23,8 @@ public class Enemy : Character
             return false;
         }
     }
+
+    //Checks if target is close enough to hit in range
     public bool InFireRange
     {
         get
@@ -32,20 +36,34 @@ public class Enemy : Character
             return false;
         }
     }
-    // Start is called before the first frame update
+
+    public override bool IsDead
+    {
+        get
+        {
+            return health <= 0;
+        }
+    }
+
     public override void Start()
     {
         base.Start();
         ChangeState(new IdleState());
     }
    
-
-    // Update is called once per frame
     void Update()
     {
-        currentState.Execute();
-        LookAtTarget();
+        if (!IsDead)
+        {
+            if (!TakingDamage)
+            {
+                currentState.Execute();
+            }
+            LookAtTarget();
+        }
     }
+
+    //Change direction is target in on the back
     private void LookAtTarget()
     {
         if (Target != null)
@@ -58,6 +76,7 @@ public class Enemy : Character
 
         }
     }
+    //Just change state
     public void ChangeState(IEnemyState newState)
     {
         if (currentState != null)
@@ -81,8 +100,23 @@ public class Enemy : Character
     {
         return facingRight ? Vector2.right : Vector2.left;
     }
-    void OnTriggerEnter2D(Collider2D other)
+    public override void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
         currentState.OnTriggerEnter(other);
+    }
+
+    public override IEnumerator TakeDamage()
+    {
+        health -= 10;
+        if (!IsDead)
+        {
+            MyAnimator.SetTrigger("damage");
+        }
+        else
+        {
+            MyAnimator.SetTrigger("die");
+            yield return null;
+        }
     }
 }

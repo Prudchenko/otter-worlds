@@ -31,6 +31,13 @@ public class Otter : Character
     public Rigidbody2D MyRigidbody { get; set; }
     public bool Jump { get; set; }
     public bool OnGround { get; set; }
+    public override bool IsDead
+    {
+        get
+        {
+            return health <= 0;
+        }
+    }
 
     public override void Start()
     {
@@ -155,5 +162,10 @@ public class Otter : Character
         {
             base.Fire(value);
         }
+    }
+
+    public override IEnumerator TakeDamage()
+    {
+        yield return null;
     }
 }

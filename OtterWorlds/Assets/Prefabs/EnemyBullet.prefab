@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2125737579191077907}
   - component: {fileID: 215919916964144103}
   - component: {fileID: 4830835306086062058}
-  - component: {fileID: -2792322159781410898}
+  - component: {fileID: 7486395061396841180}
   m_Layer: 0
-  m_Name: Bullet
-  m_TagString: Bullet
+  m_Name: EnemyBullet
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
---- !u!61 &-2792322159781410898
+--- !u!61 &7486395061396841180
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

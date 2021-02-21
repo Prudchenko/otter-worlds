@@ -670,7 +670,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303739511}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.9824, y: -3.77, z: 0}
+  m_LocalPosition: {x: -22.41, y: -3.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1953861632}
@@ -712,9 +712,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPos: {fileID: 731313666}
-  movementSpeed: 6
+  movementSpeed: 3
   bulletPrefab: {fileID: 2141520682566514349, guid: a31baed7cdc679e4795dedff3114f104,
     type: 3}
+  health: 60
   meleeRange: 1
   fireRange: 12
 --- !u!114 &303739519
@@ -1161,7 +1162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731313665}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0.7, z: 0}
+  m_LocalPosition: {x: 1.08, y: 0.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 303739514}
@@ -1350,6 +1351,7 @@ MonoBehaviour:
   movementSpeed: 7
   bulletPrefab: {fileID: 2141520682566514349, guid: a31baed7cdc679e4795dedff3114f104,
     type: 3}
+  health: 0
   groundPoints:
   - {fileID: 1373393695}
   - {fileID: 692168524}
