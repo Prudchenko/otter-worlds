@@ -43,6 +43,8 @@ public abstract class Character : MonoBehaviour
         facingRight = !facingRight;
         transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
     }
+
+    //Instantiating a bullet
     public virtual void Fire(int value)
     {
 
@@ -58,14 +60,20 @@ public abstract class Character : MonoBehaviour
             tmp.GetComponent<Bullet>().Initialize(Vector2.left);
         }
     }
+
+    //Turn on/off melee collider
     public void MeleeAttack()
     {
         MeleeCollider.enabled = !MeleeCollider.enabled;
     }
+
+    //Checks for damage sources in vicinity
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if (damageSources.Contains(other.tag))
+        
+            if (damageSources.Contains(other.tag))
         {
+
             StartCoroutine(TakeDamage());
         }
     }
