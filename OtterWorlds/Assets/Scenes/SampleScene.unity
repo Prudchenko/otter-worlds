@@ -658,7 +658,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2141520682566514349, guid: a0d678cbb5f503644973b71210d98bfa,
     type: 3}
   health: 60
-  MeleeCollider: {fileID: 1365414972}
+  meleeCollider: {fileID: 1365414972}
   damageSources:
   - Bullet
   - Melee
@@ -1216,11 +1216,11 @@ MonoBehaviour:
   movementSpeed: 7
   bulletPrefab: {fileID: 2141520682566514349, guid: a31baed7cdc679e4795dedff3114f104,
     type: 3}
-  health: 10
-  MeleeCollider: {fileID: 610584165}
+  health: 30
+  meleeCollider: {fileID: 610584165}
   damageSources:
-  - 
-  - 
+  - EnemyBullet
+  - EnemyMelee
   groundPoints:
   - {fileID: 1373393695}
   - {fileID: 692168524}
@@ -2294,8 +2294,8 @@ GameObject:
   - component: {fileID: 1365414971}
   - component: {fileID: 1365414972}
   m_Layer: 12
-  m_Name: swcol
-  m_TagString: Untagged
+  m_Name: SwordCollider
+  m_TagString: EnemyMelee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2308,7 +2308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365414970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12, y: 1.86, z: 0}
+  m_LocalPosition: {x: 0.69, y: 0.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 303739514}
@@ -2321,17 +2321,22 @@ EdgeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365414970}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.5, y: 0}
-  - {x: 0.5, y: 0}
+  - {x: -0.29948616, y: 0.31330228}
+  - {x: -0.088256836, y: 0.22616577}
+  - {x: 0.0770092, y: 0.057678938}
+  - {x: 0.034088135, y: -0.16167164}
+  - {x: -0.09730148, y: -0.32426786}
+  - {x: -0.37578964, y: -0.3177867}
+  - {x: -0.30205154, y: 0.35089874}
 --- !u!1 &1373393694
 GameObject:
   m_ObjectHideFlags: 0
