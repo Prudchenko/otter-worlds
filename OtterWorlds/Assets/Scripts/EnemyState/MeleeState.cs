@@ -16,12 +16,10 @@ public class MeleeState : IEnemyState
     public void Execute()
     {
         Attack();
-        //Switch to ranged if Player is too far
         if(enemy.InFireRange&& !enemy.InMeleeRange)
         {
             enemy.ChangeState(new RangedState());
         }
-        //Switch to idle if target was lost
         else if (enemy.Target == null)
         {
             enemy.ChangeState(new IdleState());
@@ -35,8 +33,6 @@ public class MeleeState : IEnemyState
     public void OnTriggerEnter(Collider2D other)
     {
     }
-
-    //Melee cooldown
     private void Attack()
     {
         attackTimer += Time.deltaTime;

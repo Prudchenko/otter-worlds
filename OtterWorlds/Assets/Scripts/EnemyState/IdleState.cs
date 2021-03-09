@@ -29,7 +29,6 @@ public class IdleState : IEnemyState
     public void OnTriggerEnter(Collider2D other)
     {
     }
-    //Changes to patrol state after some time
     private void Idle()
     {
         enemy.MyAnimator.SetFloat("speed", 0);
