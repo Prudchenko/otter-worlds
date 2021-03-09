@@ -15,7 +15,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField]
     protected int health;
     [SerializeField]
-    private EdgeCollider2D MeleeCollider;
+    private EdgeCollider2D meleeCollider;
     [SerializeField]
     private List<string> damageSources;
     public abstract bool IsDead { get; }
@@ -24,6 +24,14 @@ public abstract class Character : MonoBehaviour
 
     public bool TakingDamage { get; set; }
     public Animator MyAnimator { get;private set; }
+    public EdgeCollider2D MeleeCollider
+    {
+        get
+        {
+            return meleeCollider;
+        }
+    }
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -43,6 +51,8 @@ public abstract class Character : MonoBehaviour
         facingRight = !facingRight;
         transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
     }
+
+    //Instantiating a bullet
     public virtual void Fire(int value)
     {
 
@@ -58,14 +68,20 @@ public abstract class Character : MonoBehaviour
             tmp.GetComponent<Bullet>().Initialize(Vector2.left);
         }
     }
+
+    //Turn on/off melee collider
     public void MeleeAttack()
     {
-        MeleeCollider.enabled = !MeleeCollider.enabled;
+        MeleeCollider.enabled = true;
     }
+
+    //Checks for damage sources in vicinity
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if (damageSources.Contains(other.tag))
+        
+            if (damageSources.Contains(other.tag))
         {
+
             StartCoroutine(TakeDamage());
         }
     }

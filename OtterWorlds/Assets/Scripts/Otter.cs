@@ -48,20 +48,26 @@ public class Otter : Character
     // Update is called once per frame
     private void Update()
     {
-        HandleInput();
+        if (!TakingDamage && !IsDead)
+        {
+            HandleInput();
+        }
     }
 
     void FixedUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        //Checks if player is grounded
-        OnGround = IsGrounded();
-        //Moves player if possible
-        HandleMovement(horizontal);
-        //Flips Player if possible
-        Flip(horizontal);
-        //Checks which animation layer to play
-        HandleLayers();
+        if (!TakingDamage && !IsDead)
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+            //Checks if player is grounded
+            OnGround = IsGrounded();
+            //Moves player if possible
+            HandleMovement(horizontal);
+            //Flips Player if possible
+            Flip(horizontal);
+            //Checks which animation layer to play
+            HandleLayers();
+        }
     }
     private void HandleMovement(float horizontal)
     {
@@ -166,6 +172,16 @@ public class Otter : Character
 
     public override IEnumerator TakeDamage()
     {
+        health -= 10;
+        if (!IsDead)
+        {
+            MyAnimator.SetTrigger("damage");
+        }
+        else
+        {
+            MyAnimator.SetLayerWeight(1, 0);
+            MyAnimator.SetTrigger("die");
+        }
         yield return null;
     }
 }
