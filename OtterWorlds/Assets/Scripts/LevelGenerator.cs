@@ -39,6 +39,7 @@ public class LevelGenerator : MonoBehaviour
         ChunkType chunk;
 
         bool directedToTop;
+        bool firstInTheColumn = false;
 
         while (position.x < ROOM_WIDTH)
         {
@@ -46,7 +47,22 @@ public class LevelGenerator : MonoBehaviour
 
             do
             {
-                chunk = (ChunkType) Random.Range(1, CHUNK_TYPE_SIZE + 1);
+                if (firstInTheColumn)
+                {
+                    chunk = Random.Range(0, 2) == 1 ? ChunkType.BOTTOM_TOP_LEFT : ChunkType.BOTTOM_TOP_LEFT_RIGHT;
+
+                    if ((position.y == 0 && !directedToTop) || (position.y == ROOM_HEIGHT - 1 && directedToTop))
+                    {
+                        directedToTop = !directedToTop;
+                    }
+
+                    firstInTheColumn = false;
+                }
+                else
+                {
+                    chunk = (ChunkType) Random.Range(1, CHUNK_TYPE_SIZE + 1);
+                }
+
                 map[(int)position.x, (int)position.y] = chunk;
 
                 if ( (position.y == 0 && !directedToTop) || (position.y == ROOM_HEIGHT - 1 && directedToTop) )
@@ -57,18 +73,22 @@ public class LevelGenerator : MonoBehaviour
                         forcedChunk = (ChunkType) Random.Range( (int) ChunkType.BOTTOM_TOP_RIGHT, CHUNK_TYPE_SIZE + 1);
                         map[(int)position.x, (int)position.y] = forcedChunk;
                     }
+
                     break;
                 }
-                else if (directedToTop)
+                else if (directedToTop && chunk != ChunkType.BOTTOM_TOP_LEFT_RIGHT && chunk != ChunkType.BOTTOM_TOP_RIGHT)
                 {
                     position.y++;
                 } 
-                else
+                else if (chunk != ChunkType.BOTTOM_TOP_LEFT_RIGHT && chunk != ChunkType.BOTTOM_TOP_RIGHT)
                 {
                     position.y--;
                 }
 
+
             } while (chunk != ChunkType.BOTTOM_TOP_LEFT_RIGHT && chunk != ChunkType.BOTTOM_TOP_RIGHT);
+
+            firstInTheColumn = true;
 
             position.x++;
         }
