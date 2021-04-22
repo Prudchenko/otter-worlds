@@ -36,7 +36,7 @@ public class Enemy : Character
             return false;
         }
     }
-
+    //Checks if an object has less than 1 health
     public override bool IsDead
     {
         get
@@ -44,10 +44,11 @@ public class Enemy : Character
             return health <= 0;
         }
     }
-
+    //Always start idle, facing right
     public override void Start()
     {
         base.Start();
+        Otter.Instance.Dead += new DeadEventHandler(RemoveTarget);
         ChangeState(new IdleState());
     }
    
@@ -63,7 +64,13 @@ public class Enemy : Character
         }
     }
 
-    //Change direction is target in on the back
+    public void RemoveTarget()
+    {
+        Target = null;
+        ChangeState(new PatrolState());
+    }
+
+    //Change direction when target moved behind 
     private void LookAtTarget()
     {
         if (Target != null)
@@ -76,7 +83,7 @@ public class Enemy : Character
 
         }
     }
-    //Just change state
+    //Changing current state to new state
     public void ChangeState(IEnemyState newState)
     {
         if (currentState != null)
@@ -86,6 +93,7 @@ public class Enemy : Character
         currentState = newState;
         currentState.Enter(this);
     }
+    //Set animation and sprite to moving if not attacking
     public void Move()
     {
         if (!Attack)
@@ -96,16 +104,18 @@ public class Enemy : Character
 
         }
     }
+    //Returns vector which informs where enemy is facing
     public Vector2 GetDirection()
     {
         return facingRight ? Vector2.right : Vector2.left;
     }
+    //Calls for Character OnTriggerEnter2D function and current state OnTriggerEnter2D
     public override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
         currentState.OnTriggerEnter(other);
     }
-
+    //Behaviour when hit by a damage source
     public override IEnumerator TakeDamage()
     {
         health -= 10;

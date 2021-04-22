@@ -11,7 +11,7 @@ public class PatrolState : IEnemyState
     {
         this.enemy = enemy;
     }
-
+    //Patrol. If has a target in fire range, than switch to fire state.
     public void Execute()
     {
         Patrol();
@@ -26,7 +26,7 @@ public class PatrolState : IEnemyState
     public void Exit()
     {
     }
-
+    //Prevents enemy from going off from the platform
     public void OnTriggerEnter(Collider2D other)
     {
         if (other.tag == "Edge")
@@ -34,6 +34,7 @@ public class PatrolState : IEnemyState
             enemy.ChangeDirection();
         }
     }
+    //Becomes idle after some time
     private void Patrol()
     {
         patrolTimer += Time.deltaTime;

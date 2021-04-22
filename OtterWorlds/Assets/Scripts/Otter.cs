@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public delegate void DeadEventHandler();
+
 public class Otter : Character
 {
     //Singleton pattern to access from other scripts
     private static Otter instance;
+
+    public event DeadEventHandler Dead;
     public static Otter Instance
     {
         get
@@ -28,6 +33,13 @@ public class Otter : Character
     private bool airControl;
     [SerializeField]
     private float jumpForce;
+
+    private bool immortal = false;
+
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private float immortalTime;
     public Rigidbody2D MyRigidbody { get; set; }
     public bool Jump { get; set; }
     public bool OnGround { get; set; }
@@ -35,6 +47,10 @@ public class Otter : Character
     {
         get
         {
+            if (health <= 0)
+            {
+                OnDead();
+            }
             return health <= 0;
         }
     }
@@ -42,27 +58,43 @@ public class Otter : Character
     public override void Start()
     {
         base.Start();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         MyRigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        HandleInput();
+        if (!TakingDamage && !IsDead)
+        {
+            HandleInput();
+        }
     }
 
     void FixedUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        //Checks if player is grounded
-        OnGround = IsGrounded();
-        //Moves player if possible
-        HandleMovement(horizontal);
-        //Flips Player if possible
-        Flip(horizontal);
-        //Checks which animation layer to play
-        HandleLayers();
+        if (!TakingDamage && !IsDead)
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+            //Checks if player is grounded
+            OnGround = IsGrounded();
+            //Moves player if possible
+            HandleMovement(horizontal);
+            //Flips Player if possible
+            Flip(horizontal);
+            //Checks which animation layer to play
+            HandleLayers();
+        }
     }
+
+    public void OnDead()
+    {
+        if (Dead != null)
+        {
+            Dead();
+        }
+    }
+
     private void HandleMovement(float horizontal)
     {
         //Otter falls
@@ -164,8 +196,35 @@ public class Otter : Character
         }
     }
 
+    private IEnumerator IndicateImmortal()
+    {
+        while (immortal)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(.1f);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(.1f);
+        }
+    }
     public override IEnumerator TakeDamage()
     {
-        yield return null;
+        if (!immortal)
+        {
+            health -= 10;
+            if (!IsDead)
+            {
+                MyAnimator.SetTrigger("damage");
+                immortal = true;
+                StartCoroutine(IndicateImmortal());
+                yield return new WaitForSeconds(immortalTime);
+                immortal = false;
+            }
+            else
+            {
+                MyAnimator.SetLayerWeight(1, 0);
+                MyAnimator.SetTrigger("die");
+            }
+        }
+     
     }
 }
