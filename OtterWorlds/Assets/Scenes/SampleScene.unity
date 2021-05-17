@@ -739,6 +739,8 @@ MonoBehaviour:
   - Melee
   meleeRange: 1
   fireRange: 12
+  leftEdge: {fileID: 1143731052}
+  rightEdge: {fileID: 2063456201}
 --- !u!114 &303739519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1377,8 +1379,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840213189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.48, y: -21.69, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 7.11, y: 1.16, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children:
   - {fileID: 1373393695}
   - {fileID: 1404451882}
@@ -1441,6 +1443,7 @@ MonoBehaviour:
   airControl: 1
   jumpForce: 750
   immortalTime: 1
+  climbSpeed: 4
 --- !u!1 &854891862
 GameObject:
   m_ObjectHideFlags: 0
@@ -3844,7 +3847,7 @@ GameObject:
   - component: {fileID: 1143731052}
   - component: {fileID: 1143731051}
   m_Layer: 0
-  m_Name: Edge
+  m_Name: LeftEdge
   m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3884,7 +3887,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143731050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.870001, y: -24.199999, z: 0}
+  m_LocalPosition: {x: -50.51, y: -25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4537,7 +4540,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913873001}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1997259363}
@@ -7502,7 +7505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21c359306ad3cf4d89c19068c3d2586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  other: {fileID: 0}
+  other: {fileID: 7369015718609724258, guid: 0a91b0f2302940e43aa30ee2eb6b5c35, type: 3}
 --- !u!1001 &1977020025
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7633,7 +7636,7 @@ GameObject:
   - component: {fileID: 2063456201}
   - component: {fileID: 2063456200}
   m_Layer: 0
-  m_Name: Edge
+  m_Name: RightEdge
   m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7673,7 +7676,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063456199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11, y: -24.22, z: 0}
+  m_LocalPosition: {x: -16.65, y: -25.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

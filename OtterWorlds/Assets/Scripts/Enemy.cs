@@ -10,6 +10,11 @@ public class Enemy : Character
     private float meleeRange;
     [SerializeField]
     private float fireRange;
+    [SerializeField]
+    private Transform leftEdge;
+    [SerializeField]
+    private Transform rightEdge;
+
 
     //Checks if target is close enough to hit in melee
     public bool InMeleeRange
@@ -98,10 +103,20 @@ public class Enemy : Character
     {
         if (!Attack)
         {
-
-            MyAnimator.SetFloat("speed", 1);
-            transform.Translate(GetDirection() * movementSpeed * Time.deltaTime);
-
+            if ((GetDirection().x > 0 && transform.position.x < rightEdge.position.x)|| (GetDirection().x < 0 && transform.position.x > leftEdge.position.x))
+            {
+                MyAnimator.SetFloat("speed", 1);
+                transform.Translate(GetDirection() * movementSpeed * Time.deltaTime);
+            }
+            else if(currentState is PatrolState)
+            {
+                ChangeDirection();
+            }
+            else if (currentState is RangedState)
+            {
+                Target = null;
+                ChangeState(new IdleState());
+            }
         }
     }
     //Returns vector which informs where enemy is facing
@@ -128,5 +143,10 @@ public class Enemy : Character
             MyAnimator.SetTrigger("die");
             yield return null;
         }
+    }
+
+    public override void Death()
+    {
+        Destroy(gameObject);
     }
 }

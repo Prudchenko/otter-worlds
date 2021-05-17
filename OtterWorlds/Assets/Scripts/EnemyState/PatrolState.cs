@@ -6,9 +6,10 @@ public class PatrolState : IEnemyState
 {
     private Enemy enemy;
     private float patrolTimer;
-    private float patrolDuration=5;
+    private float patrolDuration;
     public void Enter(Enemy enemy)
     {
+        patrolDuration = UnityEngine.Random.Range(2, 10);
         this.enemy = enemy;
     }
     //Patrol. If has a target in fire range, than switch to fire state.
@@ -26,12 +27,13 @@ public class PatrolState : IEnemyState
     public void Exit()
     {
     }
-    //Prevents enemy from going off from the platform
+    //Choose Player as target if he shoot at enemy
     public void OnTriggerEnter(Collider2D other)
     {
-        if (other.tag == "Edge")
+        
+        if (other.tag == "Bullet")
         {
-            enemy.ChangeDirection();
+            enemy.Target = Otter.Instance.gameObject;
         }
     }
     //Becomes idle after some time

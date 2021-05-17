@@ -173,7 +173,6 @@ GameObject:
   - component: {fileID: 3180819225157015248}
   - component: {fileID: 7997752316947570583}
   - component: {fileID: 908532193685649889}
-  - component: {fileID: 7975542067689988327}
   m_Layer: 11
   m_Name: Ladder
   m_TagString: Usable
@@ -213,37 +212,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5be3aedff6560f4ca1b28801d17b579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plCo: {fileID: 0}
   gameObj: {fileID: 0}
-  platfColl: {fileID: 4238904177672569414}
 --- !u!61 &908532193685649889
 BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495737780740601138}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 5}
-  m_EdgeRadius: 0
---- !u!68 &7975542067689988327
-EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -255,14 +226,19 @@ EdgeCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.025263056, y: 0.2978952}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.39368573, y: 4.494738}
   m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.1607176, y: 2.4253323}
-  - {x: 0.21063757, y: 2.4392927}
-  - {x: 0.21063995, y: -1.8787758}
-  - {x: -0.1938854, y: -1.8792393}
-  - {x: -0.18615675, y: 2.4392931}
 --- !u!1 &2919976006918676610
 GameObject:
   m_ObjectHideFlags: 0

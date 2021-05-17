@@ -46,10 +46,18 @@ public abstract class Character : MonoBehaviour
         
     }
     public abstract IEnumerator TakeDamage();
+    public abstract void Death();
     public void ChangeDirection()
     {
         facingRight = !facingRight;
-        transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
+        if (tag == "Otter")
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, (float)0.75, (float)0.75);
+        }
+        else
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
+        }
     }
     //Instantiating a bullet
     public virtual void Fire(int value)

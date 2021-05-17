@@ -11,6 +11,8 @@ public class Otter : Character
     private static Otter instance;
 
     public event DeadEventHandler Dead;
+
+    private IUsable usable;
     public static Otter Instance
     {
         get
@@ -40,7 +42,10 @@ public class Otter : Character
 
     [SerializeField]
     private float immortalTime;
+    [SerializeField]
+    private float climbSpeed;
     public Rigidbody2D MyRigidbody { get; set; }
+    public bool OnLadder { get; set; }
     public bool Jump { get; set; }
     public bool OnGround { get; set; }
     public override bool IsDead
@@ -58,6 +63,7 @@ public class Otter : Character
     public override void Start()
     {
         base.Start();
+        OnLadder = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
         MyRigidbody = GetComponent<Rigidbody2D>();
     }
@@ -76,10 +82,11 @@ public class Otter : Character
         if (!TakingDamage && !IsDead)
         {
             float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
             //Checks if player is grounded
             OnGround = IsGrounded();
             //Moves player if possible
-            HandleMovement(horizontal);
+            HandleMovement(horizontal, vertical);
             //Flips Player if possible
             Flip(horizontal);
             //Checks which animation layer to play
@@ -95,7 +102,7 @@ public class Otter : Character
         }
     }
 
-    private void HandleMovement(float horizontal)
+    private void HandleMovement(float horizontal, float vertical)
     {
         //Otter falls
         if (MyRigidbody.velocity.y < 0)
@@ -108,9 +115,15 @@ public class Otter : Character
             MyRigidbody.velocity = new Vector2(horizontal * movementSpeed, MyRigidbody.velocity.y);
         }
         //Jumping
-        if (Jump && MyRigidbody.velocity.y == 0)
+        if (Jump && MyRigidbody.velocity.y == 0 && !OnLadder)
         {
             MyRigidbody.AddForce(new Vector2(0, jumpForce));
+        }
+        if (OnLadder)
+        {
+            MyAnimator.speed = vertical != 0 ? Mathf.Abs(vertical) : Mathf.Abs(horizontal);
+            MyRigidbody.velocity = new Vector2(horizontal * climbSpeed, vertical * climbSpeed);
+
         }
         MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
@@ -123,7 +136,7 @@ public class Otter : Character
             MyAnimator.SetTrigger("attack");
         }
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.S) && !OnLadder )
         {
             MyAnimator.SetTrigger("jump");
         }
@@ -136,6 +149,11 @@ public class Otter : Character
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             MyAnimator.SetTrigger("fire");
+        }
+        //Interact
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Use();
         }
     }
 
@@ -226,5 +244,36 @@ public class Otter : Character
             }
         }
      
+    }
+
+    public override void Death()
+    {
+        MyRigidbody.velocity = Vector2.zero;
+        //health = 30;
+    }
+
+    private void Use()
+    {
+        if (usable != null)
+        {
+            usable.Use();
+        }
+    }
+
+    public override void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "Usable")
+        {
+            usable = other.GetComponent<IUsable>();
+        }
+        base.OnTriggerEnter2D(other);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Usable")
+        {
+            usable = null;
+        }
     }
 }
