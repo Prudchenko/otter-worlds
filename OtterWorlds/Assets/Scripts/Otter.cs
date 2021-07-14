@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public delegate void DeadEventHandler();
 
@@ -26,7 +26,10 @@ public class Otter : Character
     }
 
     [SerializeField]
+    private Transform[] headPoint;
+    [SerializeField]
     private Transform[] groundPoints;
+
     [SerializeField]
     private float groundRadius;
     [SerializeField]
@@ -34,7 +37,7 @@ public class Otter : Character
     [SerializeField]
     private bool airControl;
     [SerializeField]
-    private float jumpForce;
+    public float jumpForce;
 
     private bool immortal = false;
 
@@ -91,6 +94,7 @@ public class Otter : Character
             Flip(horizontal);
             //Checks which animation layer to play
             HandleLayers();
+
         }
     }
 
@@ -135,8 +139,8 @@ public class Otter : Character
         {
             MyAnimator.SetTrigger("attack");
         }
-        //Jump
-        if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.S) && !OnLadder )
+        //Jump, dedicated to Den
+        if ((Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.W)) && !Input.GetKey(KeyCode.S) && !OnLadder)
         {
             MyAnimator.SetTrigger("jump");
         }
@@ -151,9 +155,13 @@ public class Otter : Character
             MyAnimator.SetTrigger("fire");
         }
         //Interact
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Use();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 
@@ -250,6 +258,7 @@ public class Otter : Character
     {
         MyRigidbody.velocity = Vector2.zero;
         //health = 30;
+        SceneManager.LoadScene(1);
     }
 
     private void Use()

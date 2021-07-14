@@ -53,6 +53,10 @@ public class Enemy : Character
     public override void Start()
     {
         base.Start();
+
+        health = UnityEngine.Random.Range(10, 40);
+
+        movementSpeed = UnityEngine.Random.Range(1, 5);
         Otter.Instance.Dead += new DeadEventHandler(RemoveTarget);
         ChangeState(new IdleState());
     }
